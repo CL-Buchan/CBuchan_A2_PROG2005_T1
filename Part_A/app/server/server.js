@@ -1,14 +1,14 @@
 const { createServer } = require('node:http');
+const { URL } = require('node:url');
 const fs = require('fs');
-const url = require('url');
 const path = require('path');
 
 const hostname = 'localhost';
 const port = 8080;
 
 const server = createServer((req, res) => {
-	// Gets the current path of the URL after the first '/'
-	let pathname = url.parse(req.url).pathname;
+	// Gets the current path of the URL after the first '/' **Using WHATWG URL API instead**
+	let pathname = new URL(req.url, `http://${hostname}:${port}`).pathname;
 	let filePath;
 
 	// Gets the suffix of the path eg. '.html' or '.css' etc
@@ -24,7 +24,7 @@ const server = createServer((req, res) => {
 	}
 
 	// Checks to see if the path is empty and the URL is pointing to the root
-	if (pathname === '/' || ext === '') {
+	if (pathname === './' || ext === '') {
 		filePath = path.join(__dirname, '../pages', pathname, 'index.html');
 	} else {
 		filePath = path.join(__dirname, '..', pathname);
@@ -32,12 +32,14 @@ const server = createServer((req, res) => {
 
 	// Store possible MIME types (file types)
 	const mimeTypes = {
+		'': 'text/html',
 		'.html': 'text/html',
 		'.css': 'text/css',
 		'.js': 'text/javascript',
+		'.ts': 'text/typescript',
 	};
 
-	// mimeTypes[ext] gets the value from the key value pair 
+	// mimeTypes[ext] gets the value from the key value pair
 	const contentType = mimeTypes[ext] || 'text/plain';
 
 	// Reads the file and writes/sends the data to the file (either HTML or CSS)
