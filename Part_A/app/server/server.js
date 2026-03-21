@@ -5,6 +5,7 @@ const path = require('path');
 
 const hostname = 'localhost';
 const port = 8080;
+const ROOT = path.join(__dirname, '..');
 
 const server = createServer((req, res) => {
 	// Gets the current path of the URL after the first '/' **Using WHATWG URL API instead**
@@ -14,8 +15,6 @@ const server = createServer((req, res) => {
 	// Gets the suffix of the path eg. '.html' or '.css' etc
 	const ext = path.extname(pathname);
 
-	pathname = '.' + pathname;
-
 	// Will implement more methods as the project goes on
 	if (req.method !== 'GET') {
 		res.statusCode = 405;
@@ -23,11 +22,11 @@ const server = createServer((req, res) => {
 		return res.end('Other methods are not yet implemented.');
 	}
 
-	// Checks to see if the path is empty and the URL is pointing to the root
-	if (pathname === './' || ext === '') {
-		filePath = path.join(__dirname, '../pages', pathname, 'index.html');
+	// Checks to see if the path is pointing to the root
+	if (pathname === '/') {
+		filePath = path.join(ROOT, '/pages/index.html');
 	} else {
-		filePath = path.join(__dirname, '..', pathname);
+		filePath = path.join(ROOT, pathname);
 	}
 
 	// Store possible MIME types (file types)

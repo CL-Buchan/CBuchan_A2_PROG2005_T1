@@ -9,13 +9,13 @@
 		// See also https://aka.ms/tsconfig/module
 		"module": "es6",
 		"target": "es6",
-		"lib": ["esnext"],
+		"lib": ["esnext", "DOM"],
 		"types": ["node"],
 
 		// Other Outputs
-		"sourceMap": true,
-		"declaration": true,
-		"declarationMap": true,
+		"sourceMap": false,
+		"declaration": false,
+		"declarationMap": false,
 
 		// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,

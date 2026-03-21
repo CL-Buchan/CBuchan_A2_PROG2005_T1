@@ -1,7 +1,15 @@
 import { generateId } from './helpers/generateId';
-import type { Database, Product } from './types/types';
+import type { Database, Product, ProductNames } from './types/types';
 
-export const avaliableProducts: Product = [
+export const productList: ProductNames[] = [
+	'chair',
+	'book',
+	'laptop',
+	'hair dryer',
+	'bed',
+];
+
+export const avaliableProducts: Product[] = [
 	{
 		id: generateId(),
 		name: 'chair',

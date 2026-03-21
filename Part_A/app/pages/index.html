@@ -23,6 +23,11 @@
 			href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
 			rel="stylesheet"
 		/>
+		<script
+			src="/dist/submitForm.js"
+			type="module"
+			defer
+		></script>
 		<title>Inventory Manager</title>
 	</head>
 	<body>
@@ -31,39 +36,45 @@
 			<h1>Inventory Manager</h1>
 
 			<div class="container">
-				<h2>Add Product to the Database</h2>
+				<div class="item-showcase">
+					<h3>Products</h3>
 
-				<form class="form">
-					<input
-						type="text"
-						name="productName"
-						placeholder="Enter product name"
-					/>
-					<input
-						type="text"
-						name="productManufacturer"
-						placeholder="Enter the product manufacturer"
-					/>
-					<select class="dropdown-menu">
-						<option id="dropdown-items"></option>
-					</select>
-					<input
-						type="number"
-						name="productQuantity"
-						placeholder="Enter product quantity"
-					/>
-					<button
-						type="submit"
-						name=""
-					>
-						Submit
-					</button>
-				</form>
+					<ul class="product-list">
+					</ul>
+				</div>
+
+				<div class="form-container">
+					<h3>Add a Product to the Database</h3>
+
+					<form class="form">
+						<input
+							type="text"
+							name="productName"
+							placeholder="Enter product name"
+						/>
+						<input
+							type="text"
+							name="productManufacturer"
+							placeholder="Enter the product manufacturer"
+						/>
+						<select class="dropdown-menu">
+							<option id="dropdown-items"></option>
+						</select>
+						<input
+							type="number"
+							name="productQuantity"
+							placeholder="Enter product quantity"
+						/>
+						<button
+							type="submit"
+							name="submit-form"
+						>
+							Submit
+						</button>
+					</form>
+				</div>
 			</div>
-
-			<button onclick="addProduct()"></button>
 		</main>
 		<footer></footer>
 	</body>
-	<script src="../helpers/addProduct.ts"></script>
 </html>

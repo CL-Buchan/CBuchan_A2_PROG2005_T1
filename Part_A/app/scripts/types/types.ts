@@ -2,8 +2,7 @@ export type Database = DatabaseItem[];
 
 export interface DatabaseItem {
 	sessionId: number;
-	storage: StoredItem[];
-	isOnline: boolean;
+	item: Product;
 }
 
 export interface StoredItem {
@@ -41,7 +40,7 @@ export interface Book extends Item {
 
 export interface Laptop extends Item {
 	name: 'laptop';
-	material: "aluminium" | "plastic";
+	material: 'aluminium' | 'plastic';
 	colour: string | number;
 	batteryLife: string | number;
 	screenSize: string | number;
@@ -62,4 +61,4 @@ export interface Bed extends Item {
 
 export type ProductNames = 'chair' | 'book' | 'laptop' | 'hair dryer' | 'bed';
 
-export type Product = (Chair | Book | Laptop | HairDryer | Bed)[];
+export type Product = Chair | Book | Laptop | HairDryer | Bed;
