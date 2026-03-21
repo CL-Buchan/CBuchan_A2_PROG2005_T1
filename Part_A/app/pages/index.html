@@ -10,26 +10,60 @@
 			rel="stylesheet"
 			href="/styles/global.css"
 		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com"
+		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Inventory Manager</title>
 	</head>
 	<body>
+		<header></header>
 		<main>
-			<header></header>
-			<div>
-				<h1>Inventory Manager</h1>
+			<h1>Inventory Manager</h1>
 
-				<div class="container">
-					<form class="form">
-						<input />
-						<input />
-						<input />
-						<input />
-						<button></button>
-					</form>
-				</div>
+			<div class="container">
+				<h2>Add Product to the Database</h2>
+
+				<form class="form">
+					<input
+						type="text"
+						name="productName"
+						placeholder="Enter product name"
+					/>
+					<input
+						type="text"
+						name="productManufacturer"
+						placeholder="Enter the product manufacturer"
+					/>
+					<select class="dropdown-menu">
+						<option id="dropdown-items"></option>
+					</select>
+					<input
+						type="number"
+						name="productQuantity"
+						placeholder="Enter product quantity"
+					/>
+					<button
+						type="submit"
+						name=""
+					>
+						Submit
+					</button>
+				</form>
 			</div>
-			<footer></footer>
+
+			<button onclick="addProduct()"></button>
 		</main>
+		<footer></footer>
 	</body>
-	<script src=""></script>
+	<script src="../helpers/addProduct.ts"></script>
 </html>
