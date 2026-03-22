@@ -1,19 +1,20 @@
 import { database } from './itemStorage';
 
-export function getProducts() {
+export function getDatabaseProducts() {
 	const errorMsg = document.getElementById('no-items-error');
 	const productList = document.querySelector(
 		'.product-list',
 	) as HTMLUListElement;
 
-      if (!errorMsg) return;
+	if (!errorMsg) return;
 
 	// Checks if database exists or the length is equal to
-	if (!database || database.length === 0) {
+	if ((!database || database.length === 0) && errorMsg) {
 		console.warn('There are no items in the database.');
 		productList.style.display = 'none';
-		errorMsg!.innerHTML = 'No products in database';
-		errorMsg!.style.display = 'block';
+		errorMsg.innerHTML = 'No products in database';
+		errorMsg.style.color = 'red';
+		errorMsg.style.display = 'block';
 		return;
 	}
 
@@ -32,3 +33,6 @@ export function getProducts() {
 
 	return;
 }
+
+// Using an IIFE func to ensure getProducts() runs straight away
+(() => getDatabaseProducts())();

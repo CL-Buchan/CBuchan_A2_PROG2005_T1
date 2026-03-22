@@ -28,6 +28,16 @@
 			type="module"
 			defer
 		></script>
+		<script
+			src="/dist/getDatabaseProducts.js"
+			type="module"
+			defer
+		></script>
+		<script
+			src="/dist/getItems.js"
+			type="module"
+			defer
+		></script>
 		<title>Inventory Manager</title>
 	</head>
 	<body>
@@ -36,14 +46,22 @@
 			<h1>Inventory Manager</h1>
 
 			<div class="container">
-				<div class="item-showcase">
-					<h3>Products</h3>
+				<div class="container-row">
+					<div class="item-showcase">
+						<h3>Products Database</h3>
 
-					<ul class="product-list">
-						
-					</ul>
+						<ul class="product-list"></ul>
 
-					<p id="no-items-error"></p>
+						<p id="no-products-error"></p>
+					</div>
+
+					<div class="items-list">
+						<h3>List of Items</h3>
+
+						<ul class="product-items-list"></ul>
+
+						<p id="no-items-error"></p>
+					</div>
 				</div>
 
 				<div class="form-container">
