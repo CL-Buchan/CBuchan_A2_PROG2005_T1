@@ -36,7 +36,8 @@
 		"isolatedModules": true,
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"moduleResolution": "bundler",
 	},
 	"exclude": ["dist", "app/scripts/types", "node_modules"]
 }

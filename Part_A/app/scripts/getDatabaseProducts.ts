@@ -1,12 +1,14 @@
+import { watcher } from './helpers/watcher';
 import { database } from './itemStorage';
 
 export function getDatabaseProducts() {
-	const errorMsg = document.getElementById('no-items-error');
+	let listItem;
+	const errorMsg = document.getElementById('no-products-error');
 	const productList = document.querySelector(
 		'.product-list',
 	) as HTMLUListElement;
 
-	if (!errorMsg) return;
+	if (!errorMsg) return console.warn('No error message available.');
 
 	// Checks if database exists or the length is equal to
 	if ((!database || database.length === 0) && errorMsg) {
@@ -18,16 +20,23 @@ export function getDatabaseProducts() {
 		return;
 	}
 
-	const listItem = document.createElement('li');
+	errorMsg.style.display = 'none';
+	productList.style.display = 'block';
 
 	// Iterate through each name, creating a new array with the names
-	const products = database.map((item) => item.item.name);
+	const products = database.map((item) => item);
 
-	if (!products) return;
+	if (!products)
+		return console.error(
+			'Returned early as products array does not exist',
+		);
+
+	console.log('database length: ', database.length);
 
 	// Iterates through each product name from the database and appends the list item to the product list
-	for (const names of products) {
-		listItem.innerHTML = names;
+	for (const product of products) {
+		listItem = document.createElement('li');
+		listItem.innerHTML = product.item.name;
 		productList.append(listItem);
 	}
 
@@ -35,4 +44,15 @@ export function getDatabaseProducts() {
 }
 
 // Using an IIFE func to ensure getProducts() runs straight away
-(() => getDatabaseProducts())();
+// (async () => {
+// 	try {
+// 		getDatabaseProducts();
+// 		await watcher(database, () => getDatabaseProducts());
+// 	} catch (error) {
+// 		console.warn(error);
+// 	}
+// })();
+
+(() => {
+	getDatabaseProducts();
+})();
