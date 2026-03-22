@@ -1,4 +1,7 @@
-export function watcher(item: Object | Array<Object[] | string[]>) {
+export function watcher(
+	item: Object | Array<Object[] | string[]>,
+	action: () => void,
+) {
 	// Return early if type of item !== object or array (object array or string array)
 	if (!item || typeof item !== 'object' || typeof item !== typeof Array)
 		return console.warn(
@@ -13,6 +16,7 @@ export function watcher(item: Object | Array<Object[] | string[]>) {
 		if (item === initialParsedItem)
 			return console.warn('No changes detected!');
 
-            return item;
+            // Run action if changes are detected
+		action();
 	}, 10);
 }
