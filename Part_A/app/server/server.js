@@ -12,8 +12,12 @@ const server = createServer((req, res) => {
 	let pathname = new URL(req.url, `http://${hostname}:${port}`).pathname;
 	let filePath;
 
+	console.log(0, 'pathname: ', pathname);
+
 	// Gets the suffix of the path eg. '.html' or '.css' etc
 	const ext = path.extname(pathname);
+
+	console.log('path extension (filename): ', path.extname(pathname));
 
 	// Will implement more methods as the project goes on
 	if (req.method !== 'GET') {
@@ -25,6 +29,9 @@ const server = createServer((req, res) => {
 	// Checks to see if the path is pointing to the root
 	if (pathname === '/') {
 		filePath = path.join(ROOT, '/pages/index.html');
+	} else if (path.extname(pathname) === '.js') {
+		console.log('pathname for JS file: ', pathname);
+		filePath = path.join(__dirname, '../..', pathname);
 	} else {
 		filePath = path.join(ROOT, pathname);
 	}
@@ -41,8 +48,14 @@ const server = createServer((req, res) => {
 	// mimeTypes[ext] gets the value from the key value pair
 	const contentType = mimeTypes[ext] || 'text/plain';
 
+	console.log(1, 'pathname: ', pathname);
+	console.log(2, 'filepath: ', filePath);
+	console.log(3, 'dirname: ', __dirname);
+	console.log(4, 'root: ', ROOT);
+
 	// Reads the file and writes/sends the data to the file (either HTML or CSS)
 	fs.readFile(filePath, 'utf-8', (error, data) => {
+		console.log(5, 'finding: ', filePath);
 		if (error) {
 			res.statusCode = 404;
 			res.setHeader('Content-Type', 'text/plain');
