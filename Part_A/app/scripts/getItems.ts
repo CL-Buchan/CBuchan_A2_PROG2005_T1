@@ -1,51 +1,64 @@
-import { watcher } from './helpers/watcher.js';
 import { avaliableProducts } from './itemStorage.js';
 
-export function getItems() {
+export function getItems(targetElement?: string, errorMsg?: string) {
 	let listItem;
-	const errorMsg = document.getElementById('no-items-error');
-	const productList = document.querySelector(
-		'.product-items-list',
-	) as HTMLUListElement;
 
-	if (!errorMsg) return console.warn('No error message available.');
+	// If elements are given to mutate change innerHtml OTHERWISE return all products in list
+	if (targetElement || errorMsg) {
+		const error = document.getElementById(errorMsg || '');
+		const list = document.querySelector(
+			targetElement || '',
+		) as HTMLUListElement;
+
+		if (!error || !list) {
+			console.warn(
+				'Selected elements cannot be found in document.',
+			);
+			return [];
+		}
+
+		// Checks if database exists or the length is equal to
+		if (
+			(!avaliableProducts || avaliableProducts.length === 0) &&
+			errorMsg
+		) {
+			console.warn('There are no items in the list.');
+			list.style.display = 'none';
+			error.innerHTML = 'No products in the product list.';
+			error.style.color = 'red';
+			error.style.display = 'block';
+			return [];
+		}
+
+		// Iterate through each name, creating a new array with the names
+		const products = avaliableProducts.map((item) => item);
+
+		if (!products) {
+			console.error(
+				'Returned early as products array does not exist',
+			);
+			return [];
+		}
+
+		for (const item of products) {
+			listItem = document.createElement('li');
+			listItem.innerHTML = item.name;
+			list.append(listItem);
+		}
+
+		return [];
+	}
 
 	// Checks if database exists or the length is equal to
 	if ((!avaliableProducts || avaliableProducts.length === 0) && errorMsg) {
 		console.warn('There are no items in the list.');
-		productList.style.display = 'none';
-		errorMsg.innerHTML = 'No products in the product list.';
-		errorMsg.style.color = 'red';
-		errorMsg.style.display = 'block';
 		return;
 	}
 
-	// Iterate through each name, creating a new array with the names
-	const products = avaliableProducts.map((item) => item);
+	document.getElementById;
 
-	if (!products)
-		return console.error(
-			'Returned early as products array does not exist',
-		);
-
-	for (const item of products) {
-		listItem = document.createElement('li');
-		listItem.innerHTML = item.name;
-		productList.append(listItem);
-	}
-
-	return;
+	return avaliableProducts;
 }
-
-// Using an IIFE func to ensure getProducts() runs straight away
-// (async () => {
-// 	try {
-// 		getItems();
-// 		await watcher(avaliableProducts, () => getItems());
-// 	} catch (error) {
-// 		console.warn(error);
-// 	}
-// })();
 
 (() => {
 	getItems();

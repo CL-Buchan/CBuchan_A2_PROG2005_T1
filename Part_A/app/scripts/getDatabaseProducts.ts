@@ -1,57 +1,74 @@
-import { watcher } from './helpers/watcher';
-import { database } from './itemStorage';
+import { database } from './itemStorage.js';
 
-export function getDatabaseProducts() {
+export function getDatabaseProducts(target?: string, errorMsg?: string) {
 	let listItem;
-	const errorMsg = document.getElementById('no-products-error');
-	const productList = document.querySelector(
-		'.product-list',
-	) as HTMLUListElement;
 
-	if (!errorMsg) return console.warn('No error message available.');
+	if (target || errorMsg) {
+		const error = document.getElementById(
+			errorMsg || '',
+		) as HTMLElement;
+		const list = document.querySelector(
+			target || '',
+		) as HTMLUListElement;
+
+		if (!error || !list) {
+			console.warn(
+				'Selected elements cannot be found in document.',
+			);
+			return [];
+		}
+
+		// Checks if database exists or the length is equal to
+		if ((!database || database.length === 0) && errorMsg) {
+			console.warn('There are no items in the database.');
+			list.style.display = 'none';
+			error.innerHTML = 'No products in database';
+			error.style.color = 'red';
+			error.style.display = 'block';
+			return [];
+		}
+
+		error.style.display = 'none';
+		list.style.display = 'block';
+
+		// Iterate through each name, creating a new array with the names
+		const products = database.map((item) => item);
+
+		if (!products) {
+			console.error(
+				'Returned early as products array does not exist',
+			);
+			return [];
+		}
+
+		console.log('database length: ', database.length);
+
+		// Iterates through each product name from the database and appends the list item to the product list
+		for (const product of products) {
+			listItem = document.createElement('li');
+			listItem.innerHTML = product.item.name;
+			list.append(listItem);
+		}
+
+		return [];
+	}
 
 	// Checks if database exists or the length is equal to
-	if ((!database || database.length === 0) && errorMsg) {
+	if (!database || database.length === 0) {
 		console.warn('There are no items in the database.');
-		productList.style.display = 'none';
-		errorMsg.innerHTML = 'No products in database';
-		errorMsg.style.color = 'red';
-		errorMsg.style.display = 'block';
-		return;
+		return [];
 	}
 
-	errorMsg.style.display = 'none';
-	productList.style.display = 'block';
-
-	// Iterate through each name, creating a new array with the names
-	const products = database.map((item) => item);
-
-	if (!products)
-		return console.error(
-			'Returned early as products array does not exist',
-		);
-
-	console.log('database length: ', database.length);
-
-	// Iterates through each product name from the database and appends the list item to the product list
-	for (const product of products) {
+	// If no target, just display products anyway
+	for (const product of database) {
 		listItem = document.createElement('li');
 		listItem.innerHTML = product.item.name;
-		productList.append(listItem);
+		document.getElementById('product-list')?.append(listItem);
+		document.getElementById('display-all-produts')?.append(listItem);
 	}
 
-	return;
+	return database;
 }
-
-// Using an IIFE func to ensure getProducts() runs straight away
-// (async () => {
-// 	try {
-// 		getDatabaseProducts();
-// 		await watcher(database, () => getDatabaseProducts());
-// 	} catch (error) {
-// 		console.warn(error);
-// 	}
-// })();
 
 (() => {
 	getDatabaseProducts();

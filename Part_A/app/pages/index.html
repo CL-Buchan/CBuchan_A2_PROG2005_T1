@@ -38,33 +38,59 @@
 			type="module"
 			defer
 		></script>
+		<script
+			src="/dist/helpers/searchProduct.js"
+			type="module"
+			defer
+		></script>
 		<title>Inventory Manager</title>
 	</head>
 	<body>
-		<header></header>
-		<main>
+		<header>
 			<h1>Inventory Manager</h1>
-
+		</header>
+		<main>
 			<div class="container">
 				<div class="container-row">
-					<div class="item-showcase">
-						<h3>Products Database</h3>
+					<div class="container-col">
+						<h2>Search Your Product</h2>
+						<div class="container-row">
+							<input
+								id="searchBar"
+								type="text"
+								name="searchBar"
+								placeholder="Search for your product..."
+							/>
 
-						<ul class="product-list"></ul>
-
-						<p id="no-products-error"></p>
+							<button
+								id="searchBttn"
+								style="flex: 1"
+							>
+								Search
+							</button>
+						</div>
 					</div>
 
-					<div class="items-list">
-						<h3>List of Items</h3>
-
-						<ul class="product-items-list"></ul>
-
-						<p id="no-items-error"></p>
+					<div class="container-col found-product">
+						<h2>Found product</h2>
+						<ul id="display-searched-products"></ul>
 					</div>
 				</div>
 
-				<div class="form-container">
+				<div class="items-list">
+					<h3>
+						List of Items
+						<span class="inline-span"
+							><p id="number-of-items"></p
+						></span>
+					</h3>
+
+					<ul class="product-items-list"></ul>
+
+					<p id="no-items-error"></p>
+				</div>
+
+				<!-- <div class="form-container">
 					<h3>Add a Product to the Database</h3>
 
 					<form class="form">
@@ -95,9 +121,8 @@
 					</form>
 
 					<p id="form-error-msg"></p>
-				</div>
+				</div> -->
 			</div>
 		</main>
-		<footer></footer>
 	</body>
 </html>

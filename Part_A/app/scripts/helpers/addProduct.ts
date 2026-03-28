@@ -1,13 +1,8 @@
-import { avaliableProducts, database, productList } from '../itemStorage';
-import { generateId } from './generateId';
+import { avaliableProducts, database, productList } from '../itemStorage.js';
+import { generateId } from './generateId.js';
 
 export function addProduct(productName: string) {
-	if (
-		!productName ||
-		typeof productName !== 'string' ||
-		!productList.filter((item) => item === productName)
-	)
-		return;
+	if (!productName || typeof productName !== 'string') return;
 
 	// Checks if there is a product in available products array that matches the productName
 	if (!avaliableProducts.some((product) => product.name === productName)) {

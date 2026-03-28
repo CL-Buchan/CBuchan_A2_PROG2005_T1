@@ -1,5 +1,22 @@
 {
-  "devDependencies": {
-    "@types/node": "^25.5.0"
-  }
+  "name": "cbuchan_a2_prog2005_t1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./app/server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CL-Buchan/CBuchan_A2_PROG2005_T1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CL-Buchan/CBuchan_A2_PROG2005_T1/issues"
+  },
+  "homepage": "https://github.com/CL-Buchan/CBuchan_A2_PROG2005_T1#readme"
 }
