@@ -1,7 +1,11 @@
-const { createServer } = require('node:http');
-const { URL } = require('node:url');
-const fs = require('fs');
-const path = require('path');
+import { createServer } from 'node:http';
+import { fileURLToPath, URL } from 'node:url';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+console.log(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const hostname = 'localhost';
 const port = 8080;

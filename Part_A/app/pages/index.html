@@ -52,18 +52,27 @@
 		<main>
 			<div class="container">
 				<div class="container-row">
-					<div class="container-col">
+					<div class="container-col search-product">
 						<h2>Search Your Product</h2>
 						<div class="container-row">
 							<input
 								id="searchBar"
 								type="text"
-								name="searchBar"
+								name="clearSearch"
 								placeholder="Search for your product..."
 							/>
 
 							<button
+								id="clearSearch"
+								class="secondary-bttn"
+								style="flex: 1"
+							>
+								Clear Search
+							</button>
+
+							<button
 								id="searchBttn"
+								class="primary-bttn"
 								style="flex: 1"
 							>
 								Search
@@ -88,6 +97,11 @@
 					<ul class="product-items-list"></ul>
 
 					<p id="no-items-error"></p>
+				</div>
+
+				<div>
+					<h3>Manage Database Products</h3>
+					<button class="primary-bttn open-modal">Manage Products</button>
 				</div>
 
 				<!-- <div class="form-container">

@@ -57,7 +57,7 @@ main {
 .container-row {
 	width: 100%;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 4rem;
@@ -66,7 +66,7 @@ main {
 .container-col > .container-row {
 	width: 100%;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
@@ -107,6 +107,13 @@ select {
 }
 
 button {
+	border: none;
+	background-color: transparent;
+}
+
+.primary-bttn {
+	min-width: 10rem;
+	width: 100%;
 	flex: 1;
 	padding: 0.25rem 2rem;
 	color: rgba(255, 255, 255);
@@ -115,8 +122,24 @@ button {
 	background-color: rgba(0, 0, 0);
 }
 
-button:hover {
+.secondary-bttn {
+	min-width: 10rem;
+	width: 100%;
+	flex: 1;
+	padding: 0.25rem 2rem;
+	color: rgba(0, 0, 0);
+	border: 1px solid black;
+	border-radius: 1rem;
+	background-color: rgba(255, 255, 255);
+}
+
+.primary-bttn:hover {
 	background-color: rgba(0, 0, 0, 0.5);
+	transition: background-color 200ms ease-in-out;
+}
+
+.secondary-bttn:hover {
+	background-color: rgba(0, 0, 0, 0.125);
 	transition: background-color 200ms ease-in-out;
 }
 
@@ -145,8 +168,8 @@ button:hover {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
+	justify-content: center;
+	align-items: center;
 }
 
 #no-items-error {
@@ -161,11 +184,64 @@ button:hover {
 	display: none;
 }
 
-.product-item-list {
-	display: grid;
-	grid-template-columns: 3;
-}
-
 .inline-span {
 	display: none;
+}
+
+.search-product {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#searchBar {
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+	.product-items-list {
+		display: flex;
+		gap: 4rem;
+	}
+
+	.product-items-list li {
+		min-width: fit-content;
+	}
+}
+
+@media (min-width: 991px) {
+	.container-row {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 4rem;
+	}
+
+	.container-col > .container-row {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.primary-bttn {
+		min-width: 10rem;
+		flex: 1;
+		padding: 0.25rem 2rem;
+		color: rgba(255, 255, 255);
+		border: none;
+		border-radius: 1rem;
+		background-color: rgba(0, 0, 0);
+	}
+
+	#searchBar {
+		width: 70%;
+		margin-bottom: 0;
+	}
 }
