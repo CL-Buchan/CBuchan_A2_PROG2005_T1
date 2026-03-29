@@ -1,13 +1,22 @@
 <style></style>
 
 <main class="main">
+  <div>
     <div>
-        <h1>
-            Search
-        </h1>
-
-        <div>
-            <p>something....</p>
-        </div>
+      <h1>Search</h1>
+      <p>
+        Not sure what to search... You could view the products list in
+        <span><a href="/manage">manage products</a></span>
+      </p>
     </div>
+
+    <form>
+      <input
+        type="text"
+        name="search-bar"
+        placeholder="Search a product using its product name..."
+      />
+      <app-button text="Search" />
+    </form>
+  </div>
 </main>

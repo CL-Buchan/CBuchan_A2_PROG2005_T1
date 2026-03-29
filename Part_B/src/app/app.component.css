@@ -1,0 +1,16 @@
+nav {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+nav > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    gap: 3rem;
+}
+
+nav > a {
+    text-decoration: none;
+}
