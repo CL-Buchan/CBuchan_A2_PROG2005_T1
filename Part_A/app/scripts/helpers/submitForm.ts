@@ -1,12 +1,12 @@
 import { getDatabaseProducts } from './getDatabaseProducts.js';
-import { addProduct } from './helpers/addProduct.js';
-import { deleteProduct } from './helpers/deleteProduct.js';
-import { generateId } from './helpers/generateId.js';
+import { addProduct } from './addProduct.js';
+import { deleteProduct } from './deleteProduct.js';
+import { generateId } from './generateId.js';
 import {
 	avaliableProducts,
 	database,
 } from './itemStorage.js';
-import type { DatabaseItem } from './types/types.js';
+import type { DatabaseItem } from '../../types/types.js';
 
 let productName;
 

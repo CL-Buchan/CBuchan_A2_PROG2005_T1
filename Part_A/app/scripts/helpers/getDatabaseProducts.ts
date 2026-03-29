@@ -2,7 +2,7 @@ import { database } from './itemStorage.js';
 import type {
 	DatabaseItem,
 	Product,
-} from './types/types.js';
+} from '../../types/types.js';
 
 export function getDatabaseProducts(
 	target?: string,

@@ -1,8 +1,8 @@
-import { getDatabaseProducts } from '../getDatabaseProducts.js';
+import { getDatabaseProducts } from './getDatabaseProducts.js';
 import {
 	avaliableProducts,
 	database,
-} from '../itemStorage.js';
+} from './itemStorage.js';
 import { countDatabaseItems } from './countDatabaseItems.js';
 import { generateId } from './generateId.js';
 

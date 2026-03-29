@@ -1,6 +1,6 @@
 // searchProduct.js
-import { getDatabaseProducts } from '../getDatabaseProducts.js';
-import { database } from '../itemStorage.js';
+import { getDatabaseProducts } from './getDatabaseProducts.js';
+import { database } from './itemStorage.js';
 
 let searchParam: string;
 const input = document.getElementById(
@@ -66,8 +66,7 @@ document
 
 						errorMsg.style.display = 'block';
 						errorMsg.style.color = 'green';
-						errorMsg.textContent =
-							`${foundProduct[0]?.item.name} has been successfully found in the database!`;
+						errorMsg.textContent = `${foundProduct[0]?.item.name} has been successfully found in the database!`;
 						return foundProduct;
 					}
 

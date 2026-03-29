@@ -1,8 +1,8 @@
 import {
 	avaliableProducts,
 	database,
-} from '../itemStorage.js';
-import type { DatabaseItem } from '../types/types.js';
+} from './itemStorage.js';
+import type { DatabaseItem } from '../../types/types.js';
 
 let storedItems: DatabaseItem[] = [];
 let numberOfWindowLoads: number = 0;
@@ -44,7 +44,8 @@ export function countDatabaseItems() {
 		storedItems.length > 0
 	) {
 		if (
-			numberOfWindowLoads > 1 && avaliableProducts.some((item) =>
+			numberOfWindowLoads > 1 &&
+			avaliableProducts.some((item) =>
 				storedItems.some(
 					(product) =>
 						item.name === product.item.name,
