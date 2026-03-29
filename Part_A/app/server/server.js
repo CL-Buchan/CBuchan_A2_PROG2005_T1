@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const __filename = fileURLToPath(import.meta.url);
-console.log(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const hostname = 'localhost';
@@ -13,28 +12,28 @@ const ROOT = path.join(__dirname, '..');
 
 const server = createServer((req, res) => {
 	// Gets the current path of the URL after the first '/' **Using WHATWG URL API instead**
-	let pathname = new URL(req.url, `http://${hostname}:${port}`).pathname;
+	let pathname = new URL(
+		req.url,
+		`http://${hostname}:${port}`,
+	).pathname;
 	let filePath;
-
-	console.log(0, 'pathname: ', pathname);
 
 	// Gets the suffix of the path eg. '.html' or '.css' etc
 	const ext = path.extname(pathname);
-
-	console.log('path extension (filename): ', path.extname(pathname));
 
 	// Will implement more methods as the project goes on
 	if (req.method !== 'GET') {
 		res.statusCode = 405;
 		res.setHeader('Content-Type', 'text/plain');
-		return res.end('Other methods are not yet implemented.');
+		return res.end(
+			'Other methods are not yet implemented.',
+		);
 	}
 
 	// Checks to see if the path is pointing to the root
 	if (pathname === '/') {
 		filePath = path.join(ROOT, '/pages/index.html');
 	} else if (path.extname(pathname) === '.js') {
-		console.log('pathname for JS file: ', pathname);
 		filePath = path.join(__dirname, '../..', pathname);
 	} else {
 		filePath = path.join(ROOT, pathname);
@@ -52,18 +51,14 @@ const server = createServer((req, res) => {
 	// mimeTypes[ext] gets the value from the key value pair
 	const contentType = mimeTypes[ext] || 'text/plain';
 
-	console.log(1, 'pathname: ', pathname);
-	console.log(2, 'filepath: ', filePath);
-	console.log(3, 'dirname: ', __dirname);
-	console.log(4, 'root: ', ROOT);
-
 	// Reads the file and writes/sends the data to the file (either HTML or CSS)
 	fs.readFile(filePath, 'utf-8', (error, data) => {
-		console.log(5, 'finding: ', filePath);
 		if (error) {
 			res.statusCode = 404;
 			res.setHeader('Content-Type', 'text/plain');
-			return res.end(`File not found: ${error.message}`);
+			return res.end(
+				`File not found: ${error.message}`,
+			);
 		}
 
 		res.statusCode = 200;
@@ -73,5 +68,7 @@ const server = createServer((req, res) => {
 });
 
 server.listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`);
+	console.log(
+		`Server running at http://${hostname}:${port}/`,
+	);
 });

@@ -1,9 +1,19 @@
-import { avaliableProducts, database, productList } from '../itemStorage.js';
+import { getDatabaseProducts } from '../getDatabaseProducts.js';
+import {
+	avaliableProducts,
+	database,
+} from '../itemStorage.js';
+import { countDatabaseItems } from './countDatabaseItems.js';
 import { generateId } from './generateId.js';
 
-export function addProduct(productName: string) {
+export function addProduct(
+	productName: string,
+	quantity: number,
+) {
+	console.log('add product functions started');
 	try {
-		if (!productName || typeof productName !== 'string') return;
+		if (!productName || typeof productName !== 'string')
+			return;
 
 		// Checks if there is a product in available products array that matches the productName
 		if (
@@ -27,8 +37,23 @@ export function addProduct(productName: string) {
 		// Adds product to database with session ID for unique identification
 		database.push({
 			sessionId: generateId(),
-			item: product,
+			item: { ...product, quantity: quantity },
 		});
+
+		console.log(database);
+		console.log(database.length);
+
+		window.localStorage.setItem(
+			'stored items',
+			JSON.stringify(database),
+		);
+		console.log(
+			'stored in local storage:',
+			window.localStorage.getItem('stored items'),
+		);
+
+		countDatabaseItems();
+		getDatabaseProducts();
 	} catch (error) {
 		console.warn(error);
 	}

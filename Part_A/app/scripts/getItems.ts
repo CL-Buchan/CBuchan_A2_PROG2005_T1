@@ -1,12 +1,17 @@
 import { avaliableProducts } from './itemStorage.js';
 
-export function getItems(targetElement?: string, errorMsg?: string) {
+export function getItems(
+	targetElement?: string,
+	errorMsg?: string,
+) {
 	let listItem;
 
 	try {
 		// If elements are given to mutate change innerHtml OTHERWISE return all products in list
 		if (targetElement || errorMsg) {
-			const error = document.getElementById(errorMsg || '');
+			const error = document.getElementById(
+				errorMsg || '',
+			);
 			const list = document.querySelector(
 				targetElement || '',
 			) as HTMLUListElement;
@@ -24,16 +29,21 @@ export function getItems(targetElement?: string, errorMsg?: string) {
 					avaliableProducts.length === 0) &&
 				errorMsg
 			) {
-				console.warn('There are no items in the list.');
+				console.warn(
+					'There are no items in the list.',
+				);
 				list.style.display = 'none';
-				error.innerHTML = 'No products in the product list.';
+				error.innerHTML =
+					'No products in the product list.';
 				error.style.color = 'red';
 				error.style.display = 'block';
 				return [];
 			}
 
 			// Iterate through each name, creating a new array with the names
-			const products = avaliableProducts.map((item) => item);
+			const products = avaliableProducts.map(
+				(item) => item,
+			);
 
 			if (!products) {
 				console.error(
@@ -53,7 +63,8 @@ export function getItems(targetElement?: string, errorMsg?: string) {
 
 		// Checks if database exists or the length is equal to
 		if (
-			(!avaliableProducts || avaliableProducts.length === 0) &&
+			(!avaliableProducts ||
+				avaliableProducts.length === 0) &&
 			errorMsg
 		) {
 			console.warn('There are no items in the list.');
@@ -63,7 +74,11 @@ export function getItems(targetElement?: string, errorMsg?: string) {
 		for (const item of avaliableProducts) {
 			listItem = document.createElement('li');
 			listItem.innerHTML = item.name;
-			(document.querySelector(".product-items-list") as HTMLUListElement)?.append(listItem)
+			(
+				document.querySelector(
+					'.product-items-list',
+				) as HTMLUListElement
+			)?.append(listItem);
 		}
 
 		return avaliableProducts;

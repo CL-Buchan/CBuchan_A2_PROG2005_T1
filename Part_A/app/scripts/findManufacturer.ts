@@ -1,3 +1,1 @@
-export function findManufacturer() {
-      
-};
+export function findManufacturer() {}

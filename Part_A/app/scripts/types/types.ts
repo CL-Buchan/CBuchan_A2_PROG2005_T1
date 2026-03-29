@@ -59,6 +59,16 @@ export interface Bed extends Item {
 	depth: number;
 }
 
-export type ProductNames = 'chair' | 'book' | 'laptop' | 'hair dryer' | 'bed';
+export type ProductNames =
+	| 'chair'
+	| 'book'
+	| 'laptop'
+	| 'hair dryer'
+	| 'bed';
 
-export type Product = Chair | Book | Laptop | HairDryer | Bed;
+export type Product =
+	| Chair
+	| Book
+	| Laptop
+	| HairDryer
+	| Bed;

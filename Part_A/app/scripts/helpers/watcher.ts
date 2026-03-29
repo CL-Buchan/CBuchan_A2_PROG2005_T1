@@ -3,7 +3,10 @@ export function watcher(
 	action?: () => void,
 ) {
 	// Return early if type of item !== object or array (object array or string array)
-	if (!item || typeof item !== 'object' && !Array.isArray(item))
+	if (
+		!item ||
+		(typeof item !== 'object' && !Array.isArray(item))
+	)
 		return console.warn(
 			'Item does not exist, please re-enter a valid item.',
 		);
@@ -27,7 +30,7 @@ export function watcher(
 				});
 			}
 
-                  console.log('item resolved');
+			console.log('item resolved');
 			resolve({
 				success: 200,
 				data: item,

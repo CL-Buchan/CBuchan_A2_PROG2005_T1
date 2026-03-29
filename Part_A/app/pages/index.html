@@ -4,86 +4,59 @@
 		<meta charset="UTF-8" />
 		<meta
 			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<link
-			rel="stylesheet"
-			href="/styles/global.css"
-		/>
+			content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles/global.css" />
 		<link
 			rel="preconnect"
-			href="https://fonts.googleapis.com"
-		/>
+			href="https://fonts.googleapis.com" />
 		<link
 			rel="preconnect"
 			href="https://fonts.gstatic.com"
-			crossorigin
-		/>
+			crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet" />
 		<script
 			src="/dist/submitForm.js"
 			type="module"
-			defer
-		></script>
+			defer></script>
 		<script
 			src="/dist/getDatabaseProducts.js"
 			type="module"
-			defer
-		></script>
+			defer></script>
 		<script
 			src="/dist/getItems.js"
 			type="module"
-			defer
-		></script>
+			defer></script>
 		<script
 			src="/dist/helpers/searchProduct.js"
 			type="module"
-			defer
-		></script>
+			defer></script>
+		<script
+			src="/dist/helpers/countDatabaseItems.js"
+			type="module"
+			defer></script>
+		<script
+			src="/dist/toggleModal.js"
+			type="module"
+			defer></script>
 		<title>Inventory Manager</title>
 	</head>
 	<body>
 		<header>
-			<h1>Inventory Manager</h1>
+			<h1>Welcome to, Inventory Manager</h1>
+
+			<button class="primary-bttn open-modal">
+				Manage Products
+			</button>
 		</header>
 		<main>
 			<div class="container">
-				<div class="container-row">
-					<div class="container-col search-product">
-						<h2>Search Your Product</h2>
-						<div class="container-row">
-							<input
-								id="searchBar"
-								type="text"
-								name="clearSearch"
-								placeholder="Search for your product..."
-							/>
-
-							<button
-								id="clearSearch"
-								class="secondary-bttn"
-								style="flex: 1"
-							>
-								Clear Search
-							</button>
-
-							<button
-								id="searchBttn"
-								class="primary-bttn"
-								style="flex: 1"
-							>
-								Search
-							</button>
-						</div>
-					</div>
-
-					<div class="container-col found-product">
-						<h2>Found product</h2>
-						<ul id="display-searched-products"></ul>
-					</div>
+				<div>
+					<h3>
+						Database Item Count:
+						<span id="item-count"></span>
+					</h3>
 				</div>
 
 				<div class="items-list">
@@ -96,47 +69,99 @@
 
 					<ul class="product-items-list"></ul>
 
-					<p id="no-items-error"></p>
+					<p id="no-items-error" class="error-msg"></p>
 				</div>
 
-				<div>
-					<h3>Manage Database Products</h3>
-					<button class="primary-bttn open-modal">Manage Products</button>
+				<div class="container-row">
+					<div
+						class="container-col search-product">
+						<h2>Search Your Product</h2>
+						<div class="container-col">
+							<input
+								id="searchBar"
+								type="text"
+								name="clearSearch"
+								placeholder="Search for your product..." />
+
+							<button
+								id="searchBttn"
+								class="primary-bttn"
+								style="flex: 1">
+								Search
+							</button>
+							
+							<button
+								id="clearSearch"
+								class="secondary-bttn"
+								style="flex: 1">
+								Clear Search
+							</button>
+						</div>
+
+						<p class="error-msg"></p>
+					</div>
+
+					<div
+						class="container-col found-product">
+						<h2>Found product</h2>
+						<ul
+							id="display-searched-products"></ul>
+					</div>
 				</div>
-
-				<!-- <div class="form-container">
-					<h3>Add a Product to the Database</h3>
-
-					<form class="form">
-						<input
-							type="text"
-							name="productName"
-							placeholder="Enter product name"
-						/>
-						<input
-							type="text"
-							name="productManufacturer"
-							placeholder="Enter the product manufacturer"
-						/>
-						<select class="dropdown-menu">
-							<option id="dropdown-items"></option>
-						</select>
-						<input
-							type="number"
-							name="productQuantity"
-							placeholder="Enter product quantity"
-						/>
-						<button
-							type="submit"
-							name="submit-form"
-						>
-							Submit
-						</button>
-					</form>
-
-					<p id="form-error-msg"></p>
-				</div> -->
 			</div>
 		</main>
+
+		<div id="manage-products-container">
+			<h3>Manage Database Products</h3>
+
+			<form class="form">
+				<select
+					class="dropdown-menu"
+					name="dropdown">
+					<option
+						class="dropdown-items"
+						value="update">
+						Update
+					</option>
+
+					<!-- Make add the default as this would be the most likely method -->
+					<option
+						class="dropdown-items"
+						value="add"
+						selected>
+						Add
+					</option>
+					<option
+						class="dropdown-items"
+						value="remove">
+						Remove
+					</option>
+				</select>
+				<input
+					type="text"
+					name="productName"
+					placeholder="Enter product name*" />
+				<input
+					class="add-functions"
+					type="text"
+					name="productManufacturer"
+					placeholder="Enter the product manufacturer (optional)" />
+				<!-- <select class="dropdown-menu">
+					<option id="dropdown-items"></option>
+				</select> -->
+				<input
+					type="number"
+					name="productQuantity"
+					placeholder="Enter product quantity*" />
+				<button
+					type="submit"
+					name="submit-form"
+					class="primary-bttn">
+					Submit
+				</button>
+			</form>
+
+			<p id="form-error-msg" class="error-msg"></p>
+		</div>
 	</body>
 </html>
