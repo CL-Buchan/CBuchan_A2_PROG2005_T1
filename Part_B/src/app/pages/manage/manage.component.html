@@ -1,13 +1,31 @@
 <style></style>
 
 <main class="main">
-    <div>
-        <h1>
-            Manage
-        </h1>
+  <div>
+    <h1>Manage</h1>
 
-        <div>
-            <p>something....</p>
-        </div>
+    <div class="container">
+      <app-form />
+
+      <app-button text="View Database" />
     </div>
+  </div>
 </main>
+
+<!-- Modal -->
+<div class="database">
+  <div class="database-table">
+    <table>
+      <thead>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p id="form-error-msg" class="error-msg"></p>
+</div>

@@ -1,0 +1,23 @@
+<form class="form">
+  <select class="dropdown-menu" name="dropdown">
+    <option class="dropdown-items" value="update">Update</option>
+
+    <!-- Make add the default as this would be the most likely method -->
+    <option class="dropdown-items" value="add" selected>Add</option>
+    <option class="dropdown-items" value="remove">Remove</option>
+  </select>
+  <input type="text" name="productName" placeholder="Enter product name*" />
+  <input
+    class="add-functions"
+    type="text"
+    name="productManufacturer"
+    placeholder="Enter the product manufacturer (optional)"
+  />
+
+  <input
+    type="number"
+    name="productQuantity"
+    placeholder="Enter product quantity*"
+  />
+  <app-button text="Submit" buttonType="submit" />
+</form>

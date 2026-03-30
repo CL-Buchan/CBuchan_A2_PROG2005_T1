@@ -7,5 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent {
-  @Input() text = '';
+  @Input() text: string = '';
+  @Input() buttonType: string = '';
+  @Input() width: number = 0;
+
+  convertWidth() {
+    return this.width ? `${this.width}%` : '100%';
+  }
 }

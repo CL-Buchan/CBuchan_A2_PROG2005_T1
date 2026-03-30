@@ -3,10 +3,11 @@
         padding: 8px 3rem;
         color: white;
         border-radius: 3rem;
+        border: none;
         background-color: black;
     }
 </style>
 
-<button>
+<button [type]="buttonType" [style.width]="convertWidth()">
      {{ text }}
 </button>
