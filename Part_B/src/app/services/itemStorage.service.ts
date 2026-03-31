@@ -1,6 +1,5 @@
-import { Database, Product, ProductNames } from "../types/types";
-import { generateId } from "./generateId";
-
+import { Database, Product, ProductNames } from '../types/types';
+import { generateId } from '../helpers/generateId';
 
 export const productList: ProductNames[] = [
   'chair',

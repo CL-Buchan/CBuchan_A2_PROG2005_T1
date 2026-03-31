@@ -1,27 +1,45 @@
 <style></style>
 
-<main class="main">
+<main class="main" [class.blurred]="isOpen">
   <div>
     <h1>Manage</h1>
 
     <div class="container">
       <app-form />
 
-      <app-button text="View Database" (click)="toggleModal()" />
+      <app-button
+        text="View Database"
+        (click)="toggleModal()"
+        (click)="$event.stopPropagation()"
+      />
     </div>
   </div>
 </main>
 
 <!-- Modal -->
-<div id="database" [style.display]="isOpen ? 'flex' : 'none'"  (click)="$event.stopPropagation()">
+<!-- A points to the target element for @ViewChild -->
+<div
+  #databaseRef
+  id="database"
+  [style.display]="isOpen ? 'flex' : 'none'"
+  (click)="$event.stopPropagation()"
+>
   <div class="database-table">
     <table>
       <thead>
-        <th></th>
+        @for (product of database; track product.item.name) {
+          <th>{{ product.item.name }}</th>
+        } @empty {
+          <th>There are no items.</th>
+        }
       </thead>
       <tbody>
         <tr>
-          <td></td>
+          @for (product of database; track product.item.name) {
+            <td>{{ product.item.name }}</td>
+          } @empty {
+            <td>There are no items.</td>
+          }
         </tr>
       </tbody>
     </table>

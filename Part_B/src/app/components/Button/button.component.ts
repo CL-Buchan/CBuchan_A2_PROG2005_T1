@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() text: string = '';
-  @Input() buttonType: string = '';
+  @Input() buttonType: 'button' | 'submit' | 'reset' = 'button';
   @Input() width: number = 0;
 
   convertWidth() {

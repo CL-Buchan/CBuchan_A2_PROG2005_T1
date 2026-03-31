@@ -7,6 +7,12 @@ main {
   align-items: center;
 }
 
+main.blurred {
+  filter: blur(4px);
+  transition: filter 0.2s ease;
+  pointer-events: none;
+}
+
 table > thead,
 table > tbody {
   outline: 1px solid black;
@@ -17,9 +23,14 @@ td {
   padding: 1rem;
 }
 
-.database {
+#database {
+  width: fit-content;
   position: absolute;
-  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid red;
+  z-index: 2;
 }
 
 .container {
@@ -35,4 +46,3 @@ td {
 .container > app-button {
   margin-top: 1rem;
 }
-

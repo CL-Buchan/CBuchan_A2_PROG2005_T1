@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { FormComponent } from '../../components/Form/form.component';
 import { ButtonComponent } from '../../components/Button/button.component';
+import { database } from '../../services/itemStorage.service';
 
 @Component({
   standalone: true,
@@ -12,11 +19,34 @@ import { ButtonComponent } from '../../components/Button/button.component';
     style: 'width: 100%;',
   },
 })
-export class ManageComponent {
+export class ManageComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('databaseRef') databaseContainer!: ElementRef;
+  database = database;
   isOpen = false;
+
+  // Check DOM is ready and or loaded before initialising listener
+  ngAfterViewInit(): void {
+    window.addEventListener('click', this.onWindowClick);
+  }
+
+  // Remove/cleanup event listener when DOM is not using component
+  ngOnDestroy(): void {
+    window.removeEventListener('click', this.onWindowClick);
+  }
+
+  onWindowClick = (e: MouseEvent) => {
+    if (!this.databaseContainer) return;
+
+    const clickedOutside = !this.databaseContainer.nativeElement.contains(
+      e.target as Node,
+    );
+    
+    if (clickedOutside && this.isOpen) {
+      this.toggleModal();
+    }
+  };
 
   toggleModal() {
     this.isOpen = !this.isOpen;
-    console.log(this.isOpen)
   }
 }
