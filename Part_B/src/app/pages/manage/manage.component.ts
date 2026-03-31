@@ -8,5 +8,15 @@ import { ButtonComponent } from '../../components/Button/button.component';
   imports: [FormComponent, ButtonComponent],
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.css'],
+  host: {
+    style: 'width: 100%;',
+  },
 })
-export class ManageComponent {}
+export class ManageComponent {
+  isOpen = false;
+
+  toggleModal() {
+    this.isOpen = !this.isOpen;
+    console.log(this.isOpen)
+  }
+}

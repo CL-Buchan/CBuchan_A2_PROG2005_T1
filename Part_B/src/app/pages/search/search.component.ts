@@ -7,5 +7,8 @@ import { ButtonComponent } from '../../components/Button/button.component';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
   imports: [ButtonComponent],
+  host: {
+    style: 'width: 100%;',
+  },
 })
 export class SearchComponent {}

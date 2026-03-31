@@ -7,13 +7,13 @@
     <div class="container">
       <app-form />
 
-      <app-button text="View Database" />
+      <app-button text="View Database" (click)="toggleModal()" />
     </div>
   </div>
 </main>
 
 <!-- Modal -->
-<div class="database">
+<div id="database" [style.display]="isOpen ? 'flex' : 'none'"  (click)="$event.stopPropagation()">
   <div class="database-table">
     <table>
       <thead>
