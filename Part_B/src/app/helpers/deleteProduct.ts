@@ -24,9 +24,10 @@ export function deleteProduct(productName: string) {
       (item) => item.item.name === product.item.name,
     );
 
+    // Returns if product index is -1 === not found
     if (productIndex === -1) return { error: 'Product index not found' };
 
-    // Remove product
+    // Remove product and the quantity of 1
     database.splice(productIndex, 1);
   }
 
@@ -35,8 +36,9 @@ export function deleteProduct(productName: string) {
     window.localStorage.getItem('stored items') || '[]',
   );
 
+  // Remove the product by making a new array where products do not equal product name
   const updatedItems = existingItems.filter(
-    (product: DatabaseItem) => product.item.name !== product.item.name,
+    (item: DatabaseItem) => item.item.name !== product.item.name,
   );
 
   window.localStorage.setItem('stored items', JSON.stringify(updatedItems));

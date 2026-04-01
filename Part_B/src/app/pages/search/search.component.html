@@ -67,7 +67,7 @@
     </div>
 
     <!-- Search/filter result for searched and filtered product -->
-    @if (searchResult || {} || filterResult.length > 0) {
+    @if (searchResult || {} || filterResult.length > 0 && isFiltersOn) {
       <div id="result">
         @if (searchClicked) {
           <div class="container">
