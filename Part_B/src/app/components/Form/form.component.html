@@ -5,11 +5,24 @@
     <option value="remove">Remove</option>
   </select>
 
-  <input name="productName" [(ngModel)]="productName" />
-  <input name="productManufacturer" [(ngModel)]="productManufacturer" />
-  <input type="number" name="productQuantity" [(ngModel)]="productQuantity" />
+  <input
+    name="productName"
+    [(ngModel)]="productName"
+    [placeholder]="placeholders['productName']"
+  />
+  <input
+    name="productManufacturer"
+    [(ngModel)]="productManufacturer"
+    [placeholder]="placeholders['productManufacturer']"
+  />
+  <input
+    type="number"
+    name="productQuantity"
+    [(ngModel)]="productQuantity"
+    [placeholder]="placeholders['productQuantity']"
+  />
 
-   <app-button text="Submit" buttonType="submit"></app-button>
+  <app-button text="Submit" buttonType="submit"></app-button>
 </form>
 
 <p *ngIf="message" [style.color]="isError ? 'red' : 'green'">

@@ -1,45 +1,159 @@
 main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main.blurred {
+  filter: blur(4px);
+  transition: filter 0.2s ease;
+  pointer-events: none;
 }
 
 form {
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 form > input {
-    min-width: 20rem;
-    padding: 8px 0 8px 1rem;
-    border: 1px solid rgb(0, 0, 0, 0.25);
-    border-radius: 3rem;
-    transition: background-color .5s ease-in-out;
+  min-width: 20rem;
+  padding: 8px 0 8px 1rem;
+  border: 1px solid rgb(0, 0, 0, 0.25);
+  border-radius: 3rem;
+  transition: background-color 0.5s ease-in-out;
 }
 
 input:hover {
-    background-color: rgb(0, 0, 0, 0.05);
+  background-color: rgb(0, 0, 0, 0.05);
 }
 
 a {
-    color: black;
-    text-decoration: none;
-    transition: color .25s ease-in-out;
+  color: black;
+  text-decoration: none;
+  transition: color 0.25s ease-in-out;
 }
 
 a:hover {
-    cursor: pointer;
-    color: rgb(0, 0, 0, 0.5)
+  cursor: pointer;
+  color: rgb(0, 0, 0, 0.5);
 }
 
 #filter-search {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 .button-container {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#database {
+  width: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background-color: white;
+}
+
+table > thead,
+table > tbody {
+  outline: 1px solid black;
+}
+
+th,
+td {
+  padding: 1rem;
+}
+
+#filter-bttn {
+  height: 40px;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1rem;
+  background-color: black;
+  transition: height 0.3s ease-in-out;
+}
+
+#filter-bttn:hover,
+select:hover {
+  height: fit-content;
+  transform: translateY(0px);
+}
+
+#filter-bttn:hover > select {
+  height: fit-content;
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+select {
+  min-width: 100%;
+  height: 0;
+  opacity: 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  text-align: center;
+  transform: translateY(-20px);
+  transition: height opacity transform background-color 0.3s ease-in-out;
+}
+
+select:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+button {
+  min-width: 100%;
+  padding: 8px 2rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: black;
+  color: white;
+  box-sizing: border-box;
+}
+
+.parentContainer {
+  max-width: 70%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.msg-container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form-container {
+    padding: 1rem;
+}
+
+#result {
+    
 }

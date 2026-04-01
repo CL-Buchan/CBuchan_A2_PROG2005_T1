@@ -1,7 +1,7 @@
 <style></style>
 
-<main class="main">
-  <div>
+<main class="main" [class.blurred]="isOpen">
+  <div class="parentContainer">
     <div>
       <h1>Search</h1>
       <p>
@@ -10,17 +10,145 @@
       </p>
     </div>
 
-    <form>
-      <input
-        type="text"
-        name="search-bar"
-        placeholder="Search a product using its product name..."
-      />
-      <app-button text="Search" />
-    </form>
+    <div class="form-container">
+      <form>
+        <input
+          type="text"
+          name="search-bar"
+          [(ngModel)]="productSearchedName"
+          placeholder="Search a product using its product name..."
+        />
 
-    <div class="button-container">
-      <app-button text="Filter Search" />
+        <span #searchRef
+          ><app-button
+            text="Search"
+            (click)="searchDatabase()"
+            (click)="$event.stopPropagation()"
+        /></span>
+      </form>
+
+      <div class="button-container">
+        <div id="filter-bttn">
+          <button #filterRef (click)="toggleFilters()">Filter Search</button>
+          <select [(ngModel)]="selectValue" name="selectOptions">
+            <option value="ascending">Ascending by name</option>
+            <option value="descending">Descending by name</option>
+            <option value="popularity">Popularity</option>
+          </select>
+        </div>
+
+        <app-button
+          text="Open Search Result"
+          (click)="toggleModal()"
+          (click)="$event.stopPropagation()"
+        />
+      </div>
     </div>
+
+    <div
+      [style.display]="this.errorMsg ? 'flex' : 'block'"
+      [style.gap]="this.errorMsg ? '5px' : '0'"
+      class="msg-container"
+    >
+      @if (this.errorMsg) {
+        <p style="color: red">
+          {{ this.errorMsg }}. <br />
+          Database count: {{ this.database.length }}
+        </p>
+      } @else if (this.successMsg) {
+        <p style="color: green">
+          {{ this.successMsg }}
+        </p>
+      }
+
+      @if (this.isFiltersOn) {
+        <p>Filters {{ isFiltersOn ? "On" : "Off" }}</p>
+      }
+    </div>
+
+    <!-- Search/filter result for searched and filtered product -->
+    @if (searchResult || {} || filterResult.length > 0) {
+      <div id="result">
+        @if (searchClicked) {
+          <div class="container">
+            <p>Name: {{ searchResult?.item?.name }}</p>
+            <p>Price: {{ searchResult?.item?.name }}</p>
+            <p>Quantity: {{ searchResult?.item?.name }}</p>
+          </div>
+        } @else if (filterResult) {
+          <div>
+            <h3 *ngIf="this.selectValue === 'popularity'">Popular Items</h3>
+            <h3 *ngIf="this.selectValue === 'ascending'">Ascending Items</h3>
+            <h3 *ngIf="this.selectValue === 'descending'">Descending Items</h3>
+            @for (product of this.filterResult; track product.item.name) {
+              @if (this.selectValue === "popularity") {
+                <p>Name: {{ product.item.name }}</p>
+                <p>Is popular: {{ product.item.isPopular }}</p>
+              }
+              @if (this.selectValue === "ascending") {
+                <p>Name: {{ product.item.name }}</p>
+              }
+              @if (this.selectValue === "descending") {
+                <p>Name: {{ product.item.name }}</p>
+              }
+            }
+          </div>
+        } @else {
+          <p>No results</p>
+        }
+      </div>
+    }
   </div>
 </main>
+
+<!-- Modal -->
+<!-- A points to the target element for @ViewChild -->
+<div
+  #databaseRef
+  id="database"
+  [style.display]="isOpen ? 'flex' : 'none'"
+  (click)="$event.stopPropagation()"
+>
+  <div class="database-table">
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </thead>
+      <tbody>
+        @if (!this.database || database.length === 0) {
+          @for (product of getProducts().data; track product.item.id) {
+            <tr>
+              <td>{{ product.item.name }}</td>
+              <td>{{ product.item.price }}</td>
+              <td>{{ product.item.quantity }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td>There are no items.</td>
+            </tr>
+          }
+        } @else if (database && database.length > 0) {
+          @for (product of database; track product.item.id) {
+            <tr>
+              <td>{{ product.item.name }}</td>
+              <td>{{ product.item.price }}</td>
+              <td>{{ product.item.quantity }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td>There are no items.</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td>There are no items.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p id="form-error-msg" class="error-msg"></p>
+</div>

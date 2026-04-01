@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ButtonComponent } from '../Button/button.component';
 import { submitForm } from '../../helpers/submitForm';
 import { FormsModule } from '@angular/forms';
@@ -10,17 +10,24 @@ import { NgIf } from '@angular/common';
   imports: [ButtonComponent, FormsModule, NgIf],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
+  host: {
+    style: 'width: 100%;',
+  },
 })
 export class FormComponent {
   action: string = 'add';
   productName: string = '';
   productManufacturer: string = '';
   productQuantity: number = 0;
-  message: string = "";
+  message: string = '';
   isError: boolean = false;
+  @Input() placeholders: Record<string, string> = {
+    productName: '',
+    productManufacturer: '',
+    productQuantity: '',
+  };
 
   handleSubmit() {
-    console.log("submitting")
     const result = submitForm(
       this.productName,
       this.productQuantity,

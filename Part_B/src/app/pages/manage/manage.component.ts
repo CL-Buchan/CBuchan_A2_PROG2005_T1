@@ -8,6 +8,7 @@ import {
 import { FormComponent } from '../../components/Form/form.component';
 import { ButtonComponent } from '../../components/Button/button.component';
 import { database } from '../../services/itemStorage.service';
+import { getItems } from '../../helpers/getItems';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ import { database } from '../../services/itemStorage.service';
 export class ManageComponent implements AfterViewInit, OnDestroy {
   @ViewChild('databaseRef') databaseContainer!: ElementRef;
   database = database;
+  availableItems = getItems().data;
   isOpen = false;
 
   // Check DOM is ready and or loaded before initialising listener

@@ -23,12 +23,23 @@ export function addProduct(productName: string, quantity: number) {
   if (!product) return { error: 'Product cannot be found' };
 
   // Adds product to database with session ID for unique identification
-  database.push({
+  const newItem = {
     sessionId: generateId(),
-    item: { ...product, quantity: quantity },
-  });
+    item: { ...product, quantity },
+  };
+  database.push(newItem);
 
-  window.localStorage.setItem('stored items', JSON.stringify(database));
+  // Get all pre-existing items from window to keep items persisting
+  const existingItems: Object[] = JSON.parse(
+    window.localStorage.getItem('stored items') || '[]',
+  );
 
-  return { data: getDatabaseProducts(), success: "Product has been added to cart"};
+  // Add the new item before setting window localStorage
+  existingItems.push(newItem);
+  window.localStorage.setItem('stored items', JSON.stringify(existingItems));
+
+  return {
+    data: getDatabaseProducts(),
+    success: 'Product has been added to cart',
+  };
 }

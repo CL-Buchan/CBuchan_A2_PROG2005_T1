@@ -1,11 +1,15 @@
-import { database } from '../services/itemStorage.service.js';
+import { database } from "../services/itemStorage.service";
+import { DatabaseItem } from "../types/types";
 
 export function getDatabaseProducts() {
-  // Checks if database exists or the length is equal to 0
-  if (!database || database.length === 0) {
-    console.warn('There are no items in the database.');
-    return { data: [] };
+  if (database && database.length > 0) {
+    return { data: database };
   }
 
-  return { data: database };
+  const rawItems = window.localStorage.getItem('stored items');
+  if (!rawItems) return { data: [] };
+
+  const storedItems: DatabaseItem[] = JSON.parse(rawItems);
+
+  return { data: storedItems };
 }

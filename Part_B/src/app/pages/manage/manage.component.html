@@ -1,17 +1,43 @@
 <style></style>
 
 <main class="main" [class.blurred]="isOpen">
-  <div>
+  <div class="parentContainer">
     <h1>Manage</h1>
 
-    <div class="container">
-      <app-form />
+    <div class="parentContainer form">
+      <app-form
+        [placeholders]="{
+          productName: 'Enter product name...',
+          productManufacturer: 'Enter product manufacturer...',
+          productQuantity: 'Enter product quantity...',
+        }"
+      />
 
       <app-button
         text="View Database"
         (click)="toggleModal()"
         (click)="$event.stopPropagation()"
       />
+    </div>
+  </div>
+
+  <div class="parentContainer">
+    <h2>Available Products</h2>
+
+    <div class="products">
+      @for (product of availableItems; track product.id) {
+        <div class="product-card">
+          <h3>{{ product.name }}</h3>
+          <a>Name: {{ product.name }}</a>
+          <a>Price: {{ product.price }}</a>
+          <a>Is Popular?: {{ product.isPopular }}</a>
+          <a>Product Status: {{ product.status }}</a>
+        </div>
+      } @empty {
+        <div>
+          <p>No available items to choose from.</p>
+        </div>
+      }
     </div>
   </div>
 </main>
@@ -27,20 +53,22 @@
   <div class="database-table">
     <table>
       <thead>
-        @for (product of database; track product.item.name) {
-          <th>{{ product.item.name }}</th>
-        } @empty {
-          <th>There are no items.</th>
-        }
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
       </thead>
       <tbody>
-        <tr>
-          @for (product of database; track product.item.name) {
+        @for (product of database; track product.item.name) {
+          <tr>
             <td>{{ product.item.name }}</td>
-          } @empty {
+            <td>{{ product.item.price }}</td>
+            <td>{{ product.item.quantity }}</td>
+          </tr>
+        } @empty {
+          <tr>
             <td>There are no items.</td>
-          }
-        </tr>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
