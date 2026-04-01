@@ -42,7 +42,7 @@ input {
 
 header {
 	height: fit-content;
-	padding: 1rem 6rem;
+	padding: 4rem 6rem 0 6rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -56,7 +56,7 @@ header > button {
 main {
 	position: relative;
 	width: 100%;
-	padding: 1rem 6rem;
+	padding: 1rem 6rem 4rem 6rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -246,6 +246,10 @@ button {
 
 #manage-products-container > .form {
 	width: 100%;
+}
+
+.items-counts {
+	display: flex;
 }
 
 @media (min-width: 600px) {

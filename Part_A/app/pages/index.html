@@ -17,27 +17,27 @@
 			href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
 			rel="stylesheet" />
 		<script
-			src="/dist/submitForm.js"
+			src="/dist/scripts/helpers/submitForm.js"
 			type="module"
 			defer></script>
 		<script
-			src="/dist/getDatabaseProducts.js"
+			src="/dist/scripts/helpers/getDatabaseProducts.js"
 			type="module"
 			defer></script>
 		<script
-			src="/dist/getItems.js"
+			src="/dist/scripts/helpers/getItems.js"
 			type="module"
 			defer></script>
 		<script
-			src="/dist/helpers/searchProduct.js"
+			src="/dist/scripts/helpers/searchProduct.js"
 			type="module"
 			defer></script>
 		<script
-			src="/dist/helpers/countDatabaseItems.js"
+			src="/dist/scripts/helpers/countDatabaseItems.js"
 			type="module"
 			defer></script>
 		<script
-			src="/dist/toggleModal.js"
+			src="/dist/scripts/helpers/toggleModal.js"
 			type="module"
 			defer></script>
 		<title>Inventory Manager</title>
@@ -51,7 +51,7 @@
 			</button>
 		</header>
 		<main>
-			<div class="container">
+			<div class="container items-counts">
 				<div>
 					<h3>
 						Database Item Count:
@@ -146,9 +146,6 @@
 					type="text"
 					name="productManufacturer"
 					placeholder="Enter the product manufacturer (optional)" />
-				<!-- <select class="dropdown-menu">
-					<option id="dropdown-items"></option>
-				</select> -->
 				<input
 					type="number"
 					name="productQuantity"

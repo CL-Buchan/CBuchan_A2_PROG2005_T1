@@ -43,9 +43,9 @@ document
 					// Find product in array that matches by product name
 					const foundProduct = items.filter(
 						(product) =>
-							product.item.name.toLowerCase() ===
+							product.name.toLowerCase() ===
 								searchParam.toLowerCase() ||
-							product.item.name
+							product.name
 								.toLowerCase()
 								.includes(
 									searchParam.toLowerCase(),
@@ -61,12 +61,12 @@ document
 									document.createElement(
 										'li',
 									).innerHTML =
-										product.item.name),
+										product.name),
 						);
 
 						errorMsg.style.display = 'block';
 						errorMsg.style.color = 'green';
-						errorMsg.textContent = `${foundProduct[0]?.item.name} has been successfully found in the database!`;
+						errorMsg.textContent = `${foundProduct[0]?.name} has been successfully found in the database!`;
 						return foundProduct;
 					}
 

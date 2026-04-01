@@ -81,6 +81,8 @@ export function getItems(
 			)?.append(listItem);
 		}
 
+		console.log(1)
+
 		return avaliableProducts;
 	} catch (error) {
 		console.warn(error);
@@ -88,5 +90,7 @@ export function getItems(
 }
 
 (() => {
-	getItems();
+	document.addEventListener('DOMContentLoaded', () => {
+		getItems();
+	});
 })();

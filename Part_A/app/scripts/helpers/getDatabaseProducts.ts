@@ -1,22 +1,20 @@
-import { database } from './itemStorage.js';
-import type {
-	DatabaseItem,
-	Product,
-} from '../../types/types.js';
+import { getItems } from './getItems.js';
+import { avaliableProducts } from './itemStorage.js';
 
 export function getDatabaseProducts(
-	target?: string,
+	targetElement?: string,
 	errorMsg?: string,
 ) {
 	let listItem;
 
 	try {
-		if (target || errorMsg) {
+		// If elements are given to mutate change innerHtml OTHERWISE return all products in list
+		if (targetElement || errorMsg) {
 			const error = document.getElementById(
 				errorMsg || '',
-			) as HTMLElement;
+			);
 			const list = document.querySelector(
-				target || '',
+				targetElement || '',
 			) as HTMLUListElement;
 
 			if (!error || !list) {
@@ -28,25 +26,24 @@ export function getDatabaseProducts(
 
 			// Checks if database exists or the length is equal to
 			if (
-				(!database || database.length === 0) &&
+				(!avaliableProducts ||
+					avaliableProducts.length === 0) &&
 				errorMsg
 			) {
 				console.warn(
-					'There are no items in the database.',
+					'There are no items in the list.',
 				);
 				list.style.display = 'none';
-				error.innerHTML = 'No products in database';
+				error.innerHTML =
+					'No products in the product list.';
 				error.style.color = 'red';
 				error.style.display = 'block';
 				return [];
 			}
 
-			error.style.display = 'none';
-			list.style.display = 'block';
-
 			// Iterate through each name, creating a new array with the names
-			const products = database.map(
-				(item: DatabaseItem) => item,
+			const products = avaliableProducts.map(
+				(item) => item,
 			);
 
 			if (!products) {
@@ -56,47 +53,41 @@ export function getDatabaseProducts(
 				return [];
 			}
 
-			console.log(
-				'database length: ',
-				database.length,
-			);
-
-			// Iterates through each product name from the database and appends the list item to the product list
-			for (const product of products) {
+			for (const item of products) {
 				listItem = document.createElement('li');
-				listItem.innerHTML = product.item.name;
+				listItem.innerHTML = item.name;
 				list.append(listItem);
 			}
 
 			return [];
 		}
 
-		// Checks if database exists or the length is equal to
-		if (!database || database.length === 0) {
-			console.warn(
-				'There are no items in the database.',
-			);
-			return [];
+		// Checks if database exists or the length is equal to 0
+		if (
+			(!avaliableProducts ||
+				avaliableProducts.length === 0) &&
+			errorMsg
+		) {
+			console.warn('There are no items in the list.');
+			return;
 		}
 
-		// If no target, just display products anyway
-		for (const product of database) {
+		for (const item of avaliableProducts) {
 			listItem = document.createElement('li');
-			listItem.innerHTML = product.item.name;
-			document
-				.getElementById('product-list')
-				?.append(listItem);
-			document
-				.getElementById('display-all-produts')
-				?.append(listItem);
+			listItem.innerHTML = item.name;
+			(
+				document.querySelector(
+					'.product-items-list',
+				) as HTMLUListElement
+			)?.append(listItem);
 		}
 
-		return database;
+		return avaliableProducts;
 	} catch (error) {
 		console.warn(error);
 	}
 }
 
 (() => {
-	getDatabaseProducts();
+	getItems();
 })();

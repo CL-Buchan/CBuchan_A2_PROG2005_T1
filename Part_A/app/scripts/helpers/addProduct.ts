@@ -40,9 +40,6 @@ export function addProduct(
 			item: { ...product, quantity: quantity },
 		});
 
-		console.log(database);
-		console.log(database.length);
-
 		window.localStorage.setItem(
 			'stored items',
 			JSON.stringify(database),

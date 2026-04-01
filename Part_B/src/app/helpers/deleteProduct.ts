@@ -21,7 +21,7 @@ export function deleteProduct(productName: string) {
     foundProduct ? (product = foundProduct) : '';
 
     const productIndex = database.findIndex(
-      (item) => item.sessionId === product.sessionId,
+      (item) => item.item.name === product.item.name,
     );
 
     if (productIndex === -1) return { error: 'Product index not found' };
