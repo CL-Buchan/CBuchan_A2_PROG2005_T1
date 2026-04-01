@@ -9,11 +9,13 @@ import { FormComponent } from '../../components/Form/form.component';
 import { ButtonComponent } from '../../components/Button/button.component';
 import { database } from '../../services/itemStorage.service';
 import { getItems } from '../../helpers/getItems';
+import { getDatabaseProducts } from '../../helpers/getDatabaseProducts';
+import { NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-manage',
-  imports: [FormComponent, ButtonComponent],
+  imports: [FormComponent, ButtonComponent, NgIf],
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.css'],
   host: {
@@ -25,6 +27,8 @@ export class ManageComponent implements AfterViewInit, OnDestroy {
   database = database;
   availableItems = getItems().data;
   isOpen = false;
+  successMsg: string = '';
+  errorMsg: string = '';
 
   // Check DOM is ready and or loaded before initialising listener
   ngAfterViewInit(): void {
@@ -42,7 +46,7 @@ export class ManageComponent implements AfterViewInit, OnDestroy {
     const clickedOutside = !this.databaseContainer.nativeElement.contains(
       e.target as Node,
     );
-    
+
     if (clickedOutside && this.isOpen) {
       this.toggleModal();
     }
@@ -50,5 +54,9 @@ export class ManageComponent implements AfterViewInit, OnDestroy {
 
   toggleModal() {
     this.isOpen = !this.isOpen;
+  }
+
+  getProducts() {
+    return getDatabaseProducts();
   }
 }

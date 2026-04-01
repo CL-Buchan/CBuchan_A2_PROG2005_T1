@@ -58,13 +58,31 @@
         <th>Quantity</th>
       </thead>
       <tbody>
-        @for (product of database; track product.item.name) {
-          <tr>
-            <td>{{ product.item.name }}</td>
-            <td>{{ product.item.price }}</td>
-            <td>{{ product.item.quantity }}</td>
-          </tr>
-        } @empty {
+        @if (!this.database || database.length === 0) {
+          @for (product of getProducts().data; track product.item.id) {
+            <tr>
+              <td>{{ product.item.name }}</td>
+              <td>{{ product.item.price }}</td>
+              <td>{{ product.item.quantity }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td>There are no items.</td>
+            </tr>
+          }
+        } @else if (database && database.length > 0) {
+          @for (product of database; track product.item.id) {
+            <tr>
+              <td>{{ product.item.name }}</td>
+              <td>{{ product.item.price }}</td>
+              <td>{{ product.item.quantity }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td>There are no items.</td>
+            </tr>
+          }
+        } @else {
           <tr>
             <td>There are no items.</td>
           </tr>
@@ -73,5 +91,11 @@
     </table>
   </div>
 
-  <p id="form-error-msg" class="error-msg"></p>
+  <p *ngIf="this.errorMsg" class="error-msg">
+    {{ errorMsg }}
+  </p>
+
+  <p *ngIf="this.successMsg" class="success-msg">
+    {{ successMsg }}
+  </p>
 </div>

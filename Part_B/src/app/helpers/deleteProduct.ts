@@ -2,7 +2,7 @@ import { database } from '../services/itemStorage.service.js';
 import type { DatabaseItem } from '../types/types.js';
 
 export function deleteProduct(productName: string) {
-// Checks if there is a product in available products array that matches the productName
+  // Checks if there is a product in available products array that matches the productName
   if (
     !productName &&
     !database.some((product: DatabaseItem) => product.item.name === productName)
@@ -10,12 +10,36 @@ export function deleteProduct(productName: string) {
     return { error: 'Product name does not match available products!' };
   }
 
-  // Returns product object that is equal to productName
-  const product = database.find(
-    (product: DatabaseItem) => product.item.name === productName,
+  let product: DatabaseItem;
+
+  // Checks if database exists before finding and removing the product from database array using splice(index, amount)
+  if (database && database.length > 0) {
+    const foundProduct = database.find(
+      (product: DatabaseItem) => product.item.name === productName,
+    );
+
+    foundProduct ? (product = foundProduct) : '';
+
+    const productIndex = database.findIndex(
+      (item) => item.sessionId === product.sessionId,
+    );
+
+    if (productIndex === -1) return { error: 'Product index not found' };
+
+    // Remove product
+    database.splice(productIndex, 1);
+  }
+
+  // Get existing items again from local storage before overwriting window local storage
+  const existingItems = JSON.parse(
+    window.localStorage.getItem('stored items') || '[]',
   );
 
-  if (!product) return { error: 'No product found' };
+  const updatedItems = existingItems.filter(
+    (product: DatabaseItem) => product.item.name !== product.item.name,
+  );
 
-  return { data: product };
+  window.localStorage.setItem('stored items', JSON.stringify(updatedItems));
+
+  return { success: `${productName} has been removed from storage!` };
 }

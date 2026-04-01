@@ -3,6 +3,9 @@ import { ButtonComponent } from '../Button/button.component';
 import { submitForm } from '../../helpers/submitForm';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { deleteProduct } from '../../helpers/deleteProduct';
+import { updateItem } from '../../helpers/updateItem';
+import { ProductNames } from '../../types/types';
 
 @Component({
   standalone: true,
@@ -15,8 +18,8 @@ import { NgIf } from '@angular/common';
   },
 })
 export class FormComponent {
-  action: string = 'add';
-  productName: string = '';
+  action: string = '';
+  productName: ProductNames | null = null;
   productManufacturer: string = '';
   productQuantity: number = 0;
   message: string = '';
@@ -28,20 +31,42 @@ export class FormComponent {
   };
 
   handleSubmit() {
-    const result = submitForm(
-      this.productName,
-      this.productQuantity,
-      this.action,
-    );
+    if (!this.action) return;
 
-    if (result?.error) {
-      this.message = result.error;
+    if (!this.productName) {
       this.isError = true;
-    } else if (result?.success) {
-      this.message = result.success;
-      this.isError = false;
+      this.message = 'No product name provided!';
+      return;
     }
 
-    console.log(result);
+    if (this.action === 'add') {
+      const result = submitForm(
+        this.productName,
+        this.productQuantity,
+        this.action,
+      );
+
+      if (result?.error) {
+        this.message = result.error;
+        this.isError = true;
+      } else if (result?.success) {
+        this.message = result.success;
+        this.isError = false;
+      }
+    } else if (this.action === 'remove') {
+      const result = deleteProduct(this.productName);
+
+      if (result?.error) {
+        this.message = result.error;
+        this.isError = true;
+      }
+
+      return;
+    } else {
+      updateItem(this.productName, {
+        productName: this.productName,
+        productQuantity: this.productQuantity,
+      });
+    }
   }
 }
